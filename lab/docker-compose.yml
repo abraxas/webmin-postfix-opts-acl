@@ -1,0 +1,20 @@
+name: webminh11
+
+services:
+  webmin:
+    image: webmin-lab:2.670
+    hostname: webminh11
+    pull_policy: never
+    init: true
+    restart: "no"
+    ports:
+      - "127.0.0.1:18500:10000"
+    volumes:
+      - ./entrypoint.sh:/lab/entrypoint.sh:ro
+    entrypoint: ["/bin/bash", "/lab/entrypoint.sh"]
+    environment:
+      WEBMIN_CONFIG: /etc/webmin
+      WEBMIN_VAR: /var/webmin
+      PERLLIB: /usr/share/webmin
+      LIBROOT: /usr/share/webmin
+      DEBIAN_FRONTEND: noninteractive
